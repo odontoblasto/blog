@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Blog Task - Codemy</h1>
+<h1>Blog Task - Codemy</h1><br>
+<h2>Posts ....</h2>
 
 <ul>
 {% for post in object_list %}
     <li>
-        <a href="{%url 'article-detail' post.pk%}">
+        <a href="{%url 'article-detail' post.pk %}">
             {{post.title}}</a> -
-            {{post.author}}<br>
+            {{post.author}} -
+             {{post.post_date}} -
+            <small><a href="{% url 'update_post' post.pk %}">Edit</a>
+        <a href="{% url 'delete_post' post.pk %}">Delete</a></small><br>
             {{post.body}}
     </li>
            
