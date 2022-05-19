@@ -4,15 +4,18 @@
 {% block title %}{{post.title_tag}}{% endblock%}
 
 {% block content %}
-            <h1>Post`s Details</h1>
-        </header>
-        <section>
-                <h2>{{post.title}}</h2>
-                <small>By: {{post.author}} - {{post.post_date}}
-                    <a href="{% url 'update_post' post.pk%}">Edit</a>
-                    <a href="{% url 'delete_post' post.pk %}">Delete</a><br>
-                </small><br><hr>
-                {{post.body}}
-                <br><br>
-                <a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a>
+<h1>Post`s Details</h1>
+{% if user.is_authenticated %}
+      
+    <h2>{{post.title}}</h2>
+        <small>By: {{post.author}} - {{post.post_date}}
+            <a href="{% url 'update_post' post.pk%}">Edit</a>
+            <a href="{% url 'delete_post' post.pk %}">Delete</a><br>
+            </small><br><hr>
+            {{post.body|safe}}
+            <br><br>
+            <a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a>
+{% else %}
+ <h3>Wanna see the details?Please Register first!</h3>
+{% endif %}
 {% endblock %} 
