@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ cats }}</h1><br>
+<hr>
+{% if category_post %}
+    <ul>
+    {% for post in category_post %}
+        <li>
+            <strong>{{post.category}}</strong> -
+            <a href="{%url 'article-detail' post.pk %}">
+                {{post.title}}</a>
+                 - {{post.author}}
+                 - {{post.post_date}} 
+            {% if user.is_authenticated %}
+             <small><a href="{% url 'update_post' post.pk %}">|Edit</a>
+                <a href="{% url 'delete_post' post.pk %}"> |Delete</a></small><br>
+                    {{post.body|slice:':50'|safe}}
+                    <!-- formatting with slices-->
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+<h3> This Category hasn´t been activated yet !!! (:</h3>
+{% endif %}
+{% endblock %}
+
+
+
