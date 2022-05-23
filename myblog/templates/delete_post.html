@@ -6,14 +6,16 @@
 {% if user.is_authenticated %}
 <h1> Delete Post ...</h1>
 <hr>
-<h3> Delete : {{post.title}} - {{post.post_date}}</h3>
-<br>
-<div class="form-group">
-<form method ="POST">  
-      {% csrf_token %}
-<strong>Are you sure?</strong><br><br>
-<button class="btn btn-secondary">Delete Post!</button>
-</div>
+      {% if user.id is post.author.id %}
+      <h3> Delete : {{post.title}} - {{post.post_date}}</h3>
+      <br>
+      <div class="form-group">
+      <form method ="POST">  
+            {% csrf_token %}
+      <strong>Are you sure?</strong><br><br>
+      <button class="btn btn-secondary">Delete Post!</button>
+      </div>
+      {% endif %}
 {% else %}
 <h3>You CAN NOT DELETE!!! Register first...</h3>
 {% endif %}

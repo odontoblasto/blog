@@ -4,19 +4,40 @@
 {% block title %}{{post.title_tag}}{% endblock%}
 
 {% block content %}
+<!---current user:{{user.id}}
+post author:{{post.author.id}}--->
 <h1>Post`s Details</h1>
 <hr>
-{% if user.is_authenticated %}
-      
-    <h2>{{post.title}}</h2>
+{% if user.is_authenticated  %}
+    {% if user.id is post.author.id %}
+    <h2>{{post.title}} - {{post.author.id}}</h2>
         <small>By: {{post.author}} - {{post.post_date}}
             <a href="{% url 'update_post' post.pk%}">Edit</a>
             <a href="{% url 'delete_post' post.pk %}">Delete</a><br>
+    {% endif%}
             </small><br><hr>
             {{post.body|safe}}
             <br><br>
             <a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a>
-{% else %}
+
+            <br><br><br><br>
+
+            <form action="{% url 'like_post' post.pk %}"
+            method="POST">
+                {% csrf_token %}
+
+                {% if liked %}
+                    <button class = "btn btn-danger" type="submit" name="post_id" value="{{ post.id }}">
+                    Unlike</button> 
+                    
+                {% else %}
+                   
+                    <button type="submit" class="btn btn-success" name="post_id" value="{{ post.id }}">Like</button>
+                {% endif %}
+                    - {{total_likes}} Likes
+            </form>
+
+            {% else %}
  <h3>Wanna see the details?Please Register first!</h3>
 {% endif %}
 {% endblock %} 

@@ -5,13 +5,17 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h1> Update Post</h1>{{post.post_date}}
+
 <hr>
-<div class="form-group">
-<form method ="POST">  
-      {% csrf_token %}
-      {{form.as_p}}<!---as any html component,p,ul,table..--->
-<button class="btn btn-secondary">Update</button>
-</div>
+      {% if user.id is post.author.id %}
+      <div class="form-group">
+      <form method ="POST">  
+            {% csrf_token %}
+            {{form.media}}
+            {{form.as_p}}<!--- as any html component,p,ul,table..--->
+      <button class="btn btn-secondary">Update</button>
+      </div>
+      {% endif %}
 {% else %}
 <strong>You`re not allowed here !!!( and you know it...)</strong>
 
