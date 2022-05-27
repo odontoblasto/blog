@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+
+<h1>User Profile ...</h1>
+
+{{ page_user }}
+
+<div class="card" style="width: 12rem;"><!--card from bootstrap-->
+
+    {% if page_user.profile_pic %}
+    <img src="{{ page_user.profile_pic.url }}" class="card-img-top" alt="card picture">
+    {% else %}
+    <p>default picture</p>
+    <img src="{% static 'myblog/images/default.jpg' %}" class="card-img-top" alt="card picture">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title"> {{page_user.author}}</h5>
+        <p class="'small text-muted">
+        
+            <a href="{{page_user.profile.website_url}}"> Website |</a>
+            <a href="{{page_user.profile.facebook_url}}"> Facebook |</a>     
+            <a href="{{page_user.profile.instagram_url}}">Instagram</a> </p>
+        <p class="card-text">{{page_user.bio}}</p>
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
+
+
+
+

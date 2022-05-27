@@ -1,5 +1,5 @@
-
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{post.title_tag}}{% endblock%}
 
@@ -16,6 +16,10 @@ post author:{{post.author.id}}--->
             <a href="{% url 'delete_post' post.pk %}">Delete</a><br>
     {% endif%}
             </small><br><hr>
+            {% if post.header_image %}
+                <img src="{{post.header_image.url}}" alt="header_image" width="150" height="150" class="rounded-circle"><!--resizes needed-->
+            {% endif %}
+            <br><br>
             {{post.body|safe}}
             <br><br>
             <a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a>
@@ -36,8 +40,31 @@ post author:{{post.author.id}}--->
                 {% endif %}
                     - {{total_likes}} Likes
             </form>
+            
+            <div class="card" style="width: 12rem;"><!--card from bootstrap-->
 
-            {% else %}
+                {% if post.author.profile.profile_pic %}
+                <img src="{{ post.author.profile.profile_pic.url }}" class="card-img-top" alt="card picture">
+                {% else %}
+                <p>default picture</p>
+                <img src="{% static 'myblog/images/default.jpg' %}" class="card-img-top" alt="card picture">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title"> {{post.author}} - {{post.post_date}}</h5>
+                    <p class="'small text-muted">
+                        {% if post.author.profile.id %}
+                        <a href="{% url 'show_profile_page' post.author.profile.id %}">Profile Page |</a>
+                        {% endif %}
+                        <a href="{{post.author.profile.website_url}}"> Website |</a>
+                        <a href="{{post.author.profile.facebook_url}}"> Facebook |</a>     
+                        <a href="{{post.author.profile.instagram_url}}">Instagram</a> </p>
+                    <p class="card-text">{{post.author.profile.bio}}</p>
+                </div>
+              </div>
+       
+            
+
+{% else %}
  <h3>Wanna see the details?Please Register first!</h3>
 {% endif %}
 {% endblock %} 

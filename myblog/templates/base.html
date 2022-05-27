@@ -10,14 +10,16 @@
 
     <title>
         {% block title%}
-          Blog - Codemy
+          Blog - The MH Team
         {% endblock%}
     </title>
   </head>
   <body>
+    {% load static %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home'%}">Blog - Codemy</a>
+        <a class="navbar-brand" href="{% url 'home'%}">Blog - The MH Team</a>
+        <img src="{% static 'myblog/images/mh logo.png' %}" alt=" logo MH Team"width="150" height="200">
         <ul>
         <li class="nav-item">
            <a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a>
