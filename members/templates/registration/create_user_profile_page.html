@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Create a new Blog Post{% endblock%}
+{% block title %}Create a New Profile Page{% endblock%}
 
 {% block content %}
 
-<h1>Add Post</h1>
+<h1>Add Profile</h1>
 <hr>
 {% if user.is_authenticated %}
       
             <div class="form-group">
                   <form method = "POST" enctype="multipart/form-data">  
                         {% csrf_token %}
-                        {{form.media}}
+                        
                         {{form.as_p}}<!---as any html component,p,ul,table..--->
  
-                        <button class="btn btn-secondary">Post</button>
+                        <button class="btn btn-secondary">Create Profile Page</button>
             </div>
             <!-- using JS to find author´s field, setting an ID--JS and Django variables-->
-            <script>
+            <!--script>
                   var name = "{{user.id}}";
-                 
+       
                   document.getElementById('elder').value = name;
                  /* document.write('Hello JS!!',name)
                  var name = "{{user.id}}";
@@ -27,6 +27,7 @@
                  var name = "{{user.username}}";
                  document.getElementById('elder').placeholder = name;*/
             </script>
+            <hacking vulnerability--->
    
 {% else %}
 <h3>Go on and Register first!</h3>
