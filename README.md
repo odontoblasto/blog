@@ -1,5 +1,5 @@
 # blog
-blog django..second attempt....
+blog django... task from CodemySchool....finished in 06/27/22.
 
 Raw notations----
 1 - mkdir name of the outter container...my case it´s called blog...
