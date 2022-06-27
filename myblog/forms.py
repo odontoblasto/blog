@@ -1,7 +1,7 @@
 from logging import PlaceHolder
 from secrets import choice
 from django import forms
-from .models import Post,Category
+from .models import Post,Category,Comment
 from django.forms import ModelForm
 
 #python list with select boxes....igual tuples args..static way...
@@ -47,4 +47,15 @@ class EditForm(forms.ModelForm):
             #'author':forms.Select(attrs={'class':'form-control'}), 
             'body':forms.Textarea(attrs={'class':'form-control'}), 
             'snippet':forms.Textarea(attrs={'class':'form-control'}), 
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name','body')
+
+        widgets = {
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':'Name'}),
+            'body':forms.Textarea(attrs={'class':'form-control'}), 
+            
         }

@@ -22,7 +22,7 @@ post author:{{post.author.id}}--->
             <br><br>
             {{post.body|safe}}
             <br><br>
-            <a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a>
+            <!--a href="{% url 'home' %}" class="btn btn-secondary"><= Back</a-->
 
             <br><br><br><br>
 
@@ -39,10 +39,12 @@ post author:{{post.author.id}}--->
                     <button type="submit" class="btn btn-success" name="post_id" value="{{ post.id }}">Like</button>
                 {% endif %}
                     - {{total_likes}} Likes
-            </form>
-            
+            </form><br><br>
+    
+            <br><br>
+            <hr>
             <div class="card" style="width: 12rem;"><!--card from bootstrap-->
-
+                
                 {% if post.author.profile.profile_pic %}
                 <img src="{{ post.author.profile.profile_pic.url }}" class="card-img-top" alt="card picture">
                 {% else %}
@@ -61,10 +63,26 @@ post author:{{post.author.id}}--->
                     <p class="card-text">{{post.author.profile.bio}}</p>
                 </div>
               </div>
-       
-            
-
 {% else %}
  <h3>Wanna see the details?Please Register first!</h3>
 {% endif %}
+
+<hr>
+<h2>Comments ...</h2>
+            {% if not post.comments.all %}
+                <p>No Comments Yet ...</p><a href="{% url 'add_comment' post.pk %}">Add One </a>
+            {% else %}
+            <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+            <br><br>
+                {% for comment in post.comments.all %}
+                    <strong>{{ comment.name }} -
+                            {{ comment.date_added }}
+                    </strong><br>
+                    {{ comment.body }}
+                    <br><br>
+                {% endfor %}
+                
+            {% endif %}
+
+          
 {% endblock %} 

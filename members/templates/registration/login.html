@@ -9,6 +9,10 @@
 <form method ="POST">  
       {% csrf_token %}
       {{form.as_p}}<!---as any html component,p,ul,table..--->
+<br>
 <button class="btn btn-secondary">Login</button>
 </div>
+<br>
+<p><small> Not Register yet ?</small>
+<a href="{% url 'register'%}">Register Here...</a></p>
  {% endblock %} 
